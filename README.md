@@ -15,7 +15,7 @@ Ok, let's start the game...
 
 Aaron's cards ['TH', 'AH'] has 21 points.
 
-You win! Now you have 110 dollars.
+You win! Now you have 110 chips.
 
 -> Want to play another game? (yes:1, no:0)1
 
@@ -43,7 +43,7 @@ I need an extra card...
 
 House's cards ['5D', 'QS', 'AH', '7H'] has 23 points.
 
-You win! Now you have 130 dollars.
+You win! Now you have 130 chips.
 
 -> Want to play another game? (yes:1, no:0)1
 
@@ -61,7 +61,7 @@ Aaron's cards ['9S', '3S', '4H'] has 16 points.
 
 Aaron's cards ['9S', '3S', '4H', 'KC'] has 26 points.
 
-You lose! Now you have 110 dollars.
+You lose! Now you have 110 chips.
 
 -> Want to play another game? (yes:1, no:0)0
 
