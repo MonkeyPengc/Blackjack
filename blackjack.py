@@ -58,10 +58,10 @@ def PokerRule(mychips=50, name='Jack', chipin=10):
 
     if player.point > 21:
         player.chips -= chipin
-        return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
+        return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
     elif player.point == 21:
         player.chips += chipin
-        return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
+        return "You win! Now you have " + str(player.chips) + " chips.", player.chips
     else:
         while(int(input('Do you want an extra card? (yes:1, no:0)'))):
             player.add_card()
@@ -81,16 +81,16 @@ def PokerRule(mychips=50, name='Jack', chipin=10):
                 print(house)
             if house.point <= 21 and house.point >= player.point:
                 player.chips -= chipin
-                return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
+                return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
             else:
                 player.chips += chipin
-                return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
+                return "You win! Now you have " + str(player.chips) + " chips.", player.chips
         elif player.point == 21:
             player.chips += chipin
-            return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
+            return "You win! Now you have " + str(player.chips) + " chips.", player.chips
         else:
             player.chips -= chipin
-            return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
+            return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
 
 
 # -----------------------------------------------------------------------------
