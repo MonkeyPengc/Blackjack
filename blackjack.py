@@ -30,8 +30,7 @@ class BlackJack:
         elif len(value) >= 2 and self.isAce(value[-1]) and (sum(self.new_value)+11) <= 21:
             self.new_value.append(11)
         elif value[-1] > 10:
-            value[-1] = 10
-            self.new_value.append(value[-1])
+            self.new_value.append(10)
         else:
             self.new_value.append(value[-1])
     
