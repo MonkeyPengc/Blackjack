@@ -47,7 +47,6 @@ class BlackJack:
 # -----------------------------------------------------------------------------
 # deine a function that implements blackjack following the poker rule
 
-
 def PlayPoker():
     
     player_name = input('Welcome to BlackJack! What\'s your name? ')
