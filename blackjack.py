@@ -47,41 +47,50 @@ class BlackJack:
 # -----------------------------------------------------------------------------
 # deine a function that implements blackjack following the poker rule
 
-def PlayPoker():
+def PokerRule(mychips=50, name='Jack', chipin=10):
     
-    player_name = input('Welcome to BlackJack! What\'s your name? ')
-    try:
-       player_chips = int(input('Hello, ' + player_name + '! The smallest chip to play is 5, how much do you have? '))
-    except ValueError:
-       print('Please type a valid number!')
-       player_chips = int(input('Hello, ' + player_name + '! The smallest chip to play is 5, how much do you have? '))
-    while player_chips >= 5:
-        try:
-           chip_in = int(input('How many chips do you want to play this time? '))
-        except ValueError:
-           print('Please type a valid number!')
-           chip_in = int(input('How many chips do you want to play this time? '))
-        else:
-           if chip_in > player_chips:
-              print("Sorry, you don't have enough chips to play, please buy more chips...")
-              continue
-        print("Ok, let's start the game...")
-        game, my_current_chip = PokerRule(mychips=player_chips, name=player_name, chipin=chip_in)
-        player_chips = my_current_chip
-        print(game)
-        try:
-           asktoplay = int(input('Want to play another game? (yes:1, no:0)'))
-        except ValueError:
-           print('Please type 1/0!')
-           asktoplay = int(input('Another game? (yes:1, no:0)'))
-        if asktoplay == 1:
-            if player_chips < 5:
-                print("Sorry, you don't have enough chips to play, please buy more chips...")
+    import random
+    deck = [r+s for r in '23456789TJQKA' for s in 'SHDC']
+    random.shuffle(deck)
+    player = BlackJack(chips=mychips, name=name, mydeck=deck)
+    player.new_hands() 
+    print(player)
+
+    if player.point > 21:
+        player.chips -= chipin
+        return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
+    elif player.point == 21:
+        player.chips += chipin
+        return "You win! Now you have " + str(player.chips) + " chips.", player.chips
+    else:
+        while(int(input('Do you want an extra card? (yes:1, no:0)'))):
+            player.add_card()
+            print(player)
+            if player.point >= 21:
                 break
-            continue
+            else:
+                continue
+        if player.point < 21:
+            print("Now, it's my turn...")
+            house = BlackJack(chips=500, name='House', mydeck = player.deck)
+            house.add_card()
+            print(house)
+            while house.point < player.point:
+                print("I need an extra card...")
+                house.add_card()
+                print(house)
+            if house.point <= 21 and house.point >= player.point:
+                player.chips -= chipin
+                return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
+            else:
+                player.chips += chipin
+                return "You win! Now you have " + str(player.chips) + " chips.", player.chips
+        elif player.point == 21:
+            player.chips += chipin
+            return "You win! Now you have " + str(player.chips) + " chips.", player.chips
         else:
-            print("Byebye...")
-            break
+            player.chips -= chipin
+            return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
 
 
 # -----------------------------------------------------------------------------
@@ -116,5 +125,7 @@ def PlayPoker():
 if __name__ == "__main__":
 
     PlayPoker()
+
+
 
 
