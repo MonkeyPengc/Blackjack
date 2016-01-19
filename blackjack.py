@@ -58,10 +58,10 @@ def PokerRule(mychips=50, name='Jack', chipin=10):
 
     if player.point > 21:
         player.chips -= chipin
-        return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
+        return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
     elif player.point == 21:
         player.chips += chipin
-        return "You win! Now you have " + str(player.chips) + " chips.", player.chips
+        return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
     else:
         while(int(input('Do you want an extra card? (yes:1, no:0)'))):
             player.add_card()
@@ -81,16 +81,16 @@ def PokerRule(mychips=50, name='Jack', chipin=10):
                 print(house)
             if house.point <= 21 and house.point >= player.point:
                 player.chips -= chipin
-                return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
+                return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
             else:
                 player.chips += chipin
-                return "You win! Now you have " + str(player.chips) + " chips.", player.chips
+                return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
         elif player.point == 21:
             player.chips += chipin
-            return "You win! Now you have " + str(player.chips) + " chips.", player.chips
+            return "You win! Now you have " + str(player.chips) + " dollars.", player.chips
         else:
             player.chips -= chipin
-            return "You lose! Now you have " + str(player.chips) + " chips.", player.chips
+            return "You lose! Now you have " + str(player.chips) + " dollars.", player.chips
 
 
 # -----------------------------------------------------------------------------
@@ -99,25 +99,40 @@ def PokerRule(mychips=50, name='Jack', chipin=10):
 def PlayPoker():
     
     player_name = input('Welcome to BlackJack! What\'s your name? ')
-    player_chips = int(input('Hello, ' + player_name + '! The smallest chip to play is 5, how much do you have? '))
+    
+    try:
+       player_chips = int(input('Hello, ' + player_name + '! The smallest chip to play is 5, how much do you have? '))
+    except ValueError:
+       print('Please type a valid number!')
+       player_chips = int(input('Hello, ' + player_name + '! The smallest chip to play is 5, how much do you have? '))
+
     while player_chips >= 5:
-        chip_in = int(input('How much chips do you want to play this time? '))
-        if chip_in > player_chips:
-            print("Sorry, you don't have enough chips to play, please buy more chips...")
-            continue
+        try:
+           chip_in = int(input('How many chips do you want to play this time? '))
+        except ValueError:
+           print('Please type a valid number!')
+           chip_in = int(input('How many chips do you want to play this time? '))
+        else:
+           if chip_in > player_chips:
+              print("Sorry, you don't have enough chips to play, please buy more chips...")
+              continue
         print("Ok, let's start the game...")
         game, my_current_chip = PokerRule(mychips=player_chips, name=player_name, chipin=chip_in)
         player_chips = my_current_chip
         print(game)
-        asktoplay = int(input('Want to play another game? (yes:1, no:0)'))
-        if asktoplay == 0:
-            print("Byebye...")
-            break
-        else:
+        try:
+           asktoplay = int(input('Want to play another game? (yes:1, no:0)'))
+        except ValueError:
+           print('Please type 1/0!')
+           asktoplay = int(input('Another game? (yes:1, no:0)'))
+        if asktoplay == 1:
             if player_chips < 5:
                 print("Sorry, you don't have enough chips to play, please buy more chips...")
                 break
             continue
+        else:
+            print("Byebye...")
+            break
 
 # -----------------------------------------------------------------------------
 # run script
